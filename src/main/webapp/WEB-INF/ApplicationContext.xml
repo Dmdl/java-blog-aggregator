@@ -14,15 +14,20 @@
 
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
 
-	<bean id="emf"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="emf">
 		<property name="packagesToScan" value="com.lakmal.jba.entity" />
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
+		</property>
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
 		</property>
 	</bean>
 
