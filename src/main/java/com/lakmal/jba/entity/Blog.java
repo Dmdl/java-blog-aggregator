@@ -15,7 +15,6 @@ public class Blog {
 	@Id
 	@GeneratedValue
 	private int id;
-
 	private String url;
 	private String name;
 
