@@ -40,8 +40,12 @@
 					<ul class="nav navbar-nav">
 						<li class="${current=='index' ? 'active' : ''}"><a
 							href='<spring:url value="/" />'>Home</a></li>
-						<li class="${current=='users' ? 'active' : ''}"><a href='<spring:url value="/users.html"></spring:url>'>Users</a></li>
-						<li class="${current=='nn' ? 'active' : ''}"><a href="#">Contact</a></li>
+						<li class="${current=='users' ? 'active' : ''}"><a
+							href='<spring:url value="/users.html"></spring:url>'>Users</a></li>
+						<li class="${current=='register' ? 'active' : ''}"><a
+							href='<spring:url value="/register.html"></spring:url>'>Register</a></li>
+						<li class="${current=='login' ? 'active' : ''}"><a
+							href='<spring:url value="/login.html"></spring:url>'>Login</a></li>
 					</ul>
 				</div>
 			</div>
