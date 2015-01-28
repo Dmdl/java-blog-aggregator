@@ -14,7 +14,7 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<!-- <jdbc:embedded-database type="HSQL" id="dataSource" /> -->
+	<!--<jdbc:embedded-database type="HSQL" id="dataSource" /> -->
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
