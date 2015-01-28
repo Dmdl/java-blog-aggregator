@@ -2,9 +2,12 @@ package com.lakmal.jba.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,42 +36,20 @@ public class UserController {
 		return new Blog();
 	}
 
-	@RequestMapping("/users")
-	public String users(Model model) {
-		model.addAttribute("users", userService.findAll());
-		return "users";
-	}
-
-	@RequestMapping("/users/{id}")
-	public String details(Model model, @PathVariable int id) {
-		model.addAttribute("user", userService.findOneWithBlog(id));
-		return "user-detail";
-	}
-
-	@RequestMapping("/register")
-	public String showRegister() {
-		System.out.println("register get...");
-		return "user-register";
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("user") User user) {
-		System.out.println("register post...");
-		userService.save(user);
-		return "redirect:/register.html?success=true";
-	}
-
 	@RequestMapping("/account")
 	public String account(Model model, Principal priciple) {
 		String name = priciple.getName();
-		System.out.println("Name::::::::::::: " + name);
 		model.addAttribute("user", userService.findOneWithBlog(name));
-		return "user-detail";
+		return "account";
 	}
 
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public String doAddBlog(@ModelAttribute("blog") Blog blog,
+	public String doAddBlog(Model model,
+			@Valid @ModelAttribute("blog") Blog blog, BindingResult result,
 			Principal priciple) {
+		if (result.hasErrors()) {
+			return account(model, priciple);
+		}
 		String name = priciple.getName();
 		blogService.save(blog, name);
 		return "redirect:/account.html";
@@ -76,7 +57,9 @@ public class UserController {
 
 	@RequestMapping("/blog/remove/{id}")
 	public String removeBlog(@PathVariable int id) {
-		blogService.delete(id);
+		Blog blog = blogService.findOne(id);
+		blogService.delete(blog);
 		return "redirect:/account.html";
 	}
+
 }

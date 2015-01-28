@@ -20,6 +20,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
 </head>
@@ -55,8 +58,9 @@
 						</security:authorize>
 						<security:authorize access="isAuthenticated()">
 							<li><a href='<spring:url value="/logout"></spring:url>'>Logout</a></li>
-							<li class="${current=='users' ? 'active' : ''}"><a
-							href='<spring:url value="/account.html"></spring:url>'>My Account</a></li>
+							<li class="${current=='account' ? 'active' : ''}"><a
+								href='<spring:url value="/account.html"></spring:url>'>My
+									Account</a></li>
 						</security:authorize>
 					</ul>
 				</div>

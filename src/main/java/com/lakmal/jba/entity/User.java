@@ -2,12 +2,19 @@ package com.lakmal.jba.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.lakmal.jba.annotation.UniqueUserName;
 
 @Entity
 public class User {
@@ -15,15 +22,20 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@Size(min = 3, message = "Name must be at least 3 characters!")
+	@Column(unique = true)
+	@UniqueUserName(message = "such user name already exist !")
 	private String name;
+	@Size(min = 1, message = "Invalid Email Address!")
+	@Email(message = "Invalid Email Address!")
 	private String email;
+	@Size(min = 5, message = "Name must be at least 5 characters!")
 	private String password;
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Blog> blogs;
-
 	private boolean enabled;
 
 	public boolean isEnabled() {
