@@ -64,6 +64,7 @@
 		<param-value>true</param-value>
 	</context-param>
 
+	<!-- spring profile -->
 	<context-param>
 		<param-name>spring.profiles.default</param-name>
 		<param-value>prod</param-value>
