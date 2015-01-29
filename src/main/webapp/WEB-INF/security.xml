@@ -23,10 +23,10 @@
 
 			<jdbc-user-service data-source-ref="dataSource"
 				authorities-by-username-query="select 
-				User.name,Role.name from User join User_Role on User.id=User_Role.users_id 
-				join Role on User_Role.roles_id=Role.id where User.name = ? "
+				app_user.name,Role.name from app_user join app_user_Role on app_user.id=app_user_Role.users_id 
+				join Role on app_user_Role.roles_id=Role.id where app_user.name = ? "
 				users-by-username-query="select 
-				name,password,enabled from User where name = ?" />
+				name,password,enabled from app_user where name = ?" />
 		</authentication-provider>
 	</authentication-manager>
 
